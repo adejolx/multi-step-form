@@ -4,6 +4,20 @@
 
 @layer base {
   :root {
+    /* Primary Colors */
+    --marine-blue: 213 96% 18%;
+    --purplish-blue: 243 100% 62%;
+    --pastel-blue: 228 100% 84%;
+    --light-blue: 206 94% 87%;
+    --strawberry-red: 354 84% 57%;
+
+    /* Neutral COlors */
+    --cool-gray: 231 11% 63%;
+    --light-gray: 229 24% 87%;
+    --magnolia: 217 100% 97%;
+    --alabaster: 231, 100%, 99%;
+
+    /* Component Dimensions */
     --checkbox-size: 20px;
     --checkbox-border-width: 2px;
     --checkbox-border-radius: 3px;
