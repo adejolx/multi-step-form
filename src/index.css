@@ -2,8 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  :root {
+    --checkbox-size: 20px;
+    --checkbox-border-width: 2px;
+    --checkbox-border-radius: 3px;
+  }
+}
+
 @layer utilities {
-    .debug {
-        outline: 1px solid red;
-    }
+  .debug {
+    outline: 1px solid red;
+  }
+
+  .error,
+  .required {
+    border: 2px solid red;
+  }
 }
