@@ -1,8 +1,15 @@
-type BUttonProps = {
+type ButtonProps = {
   children: React.ReactNode;
   variant?: 'ghost' | 'normal' | 'terminal';
-};
-const Button = ({ children, variant = 'normal', ...props }: BUttonProps) => {
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+} & React.HTMLAttributes<HTMLButtonElement>;
+
+const Button = ({
+  children,
+  variant = 'normal',
+  onClick,
+  ...props
+}: ButtonProps) => {
   const DEFAULT_BUTTON_CLASSES = `px-6 py-3 rounded-md transition-colors focus:outline focus:outline-offset-2  focus:outline-2${
     variant === 'normal'
       ? ' bg-blue-400 hover:bg-opacity-80 focus:outline-blue-400'
@@ -11,7 +18,12 @@ const Button = ({ children, variant = 'normal', ...props }: BUttonProps) => {
       : ' bg-transparent text-gray-400'
   } text-white font-medium capitalize`;
   return (
-    <button className={DEFAULT_BUTTON_CLASSES} type="button" {...props}>
+    <button
+      className={DEFAULT_BUTTON_CLASSES}
+      type="button"
+      onClick={onClick}
+      {...props}
+    >
       {children}
     </button>
   );
