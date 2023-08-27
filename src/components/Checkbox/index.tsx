@@ -1,15 +1,13 @@
 import { forwardRef, useState } from 'react';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { Check } from 'lucide-react';
-import { cn } from '#/utils';
+import { cn } from 'utils';
 
 type CheckboxProps = {
   checked?: boolean | 'indeterminate';
   required?: boolean;
   onCheckedChange?: (checked: boolean | 'indeterminate') => void;
   className?: string;
-  value?: 'on' | 'off';
-  getValue?: (arg: 'true' | 'false') => void;
 };
 
 const Checkbox = forwardRef<
@@ -17,19 +15,11 @@ const Checkbox = forwardRef<
   React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root> & CheckboxProps
 >(
   (
-    {
-      checked,
-      required = false,
-      onCheckedChange,
-      className,
-      value,
-      getValue,
-      ...props
-    },
+    { checked, required = false, onCheckedChange, className, ...props },
     ref,
   ) => {
     const [isTouched, setIsTouched] = useState(false);
-    const [defaultCheckedState, setDefaultCheckedState] = useState(false);
+    const [defaultChecked, setdefaultChecked] = useState(false);
     const ICON_SIZE = 16;
     const ICON_STROKE_WIDTH = 3;
     const DEFAULT_CHECKBOX_CLASSES =
@@ -37,13 +27,10 @@ const Checkbox = forwardRef<
     const DEFAULT_CHECKBOX_INDICATOR_CLASSES =
       'text-white [&[data-state=checked]:not([data-disabled])]:bg-blue-300 [&[data-state=checked]:not([data-disabled])]:w-full [&[data-state=checked]:not([data-disabled])]:h-full [&[data-state=indeterminate]:not([data-disabled])]:bg-blue-300 [&[data-state=indeterminate]:not([data-disabled])]:w-full [&[data-state=indeterminate]:not([data-disabled])]:h-full [&[data-state=checked][data-disabled]]:bg-gray-100 [&[data-state=indeterminate][data-disabled]]:bg-gray-100';
     const ERROR_CLASSES =
-      required && (!checked || !defaultCheckedState) && isTouched
-        ? 'required'
-        : '';
+      required && (!checked || !defaultChecked) && isTouched ? 'required' : '';
 
     const defaultChangeHandler = () => {
-      setDefaultCheckedState((prev) => !prev);
-      getValue?.(`${defaultCheckedState}`);
+      setdefaultChecked((prev) => !prev);
     };
 
     return (
@@ -51,7 +38,7 @@ const Checkbox = forwardRef<
         checked={checked}
         onCheckedChange={onCheckedChange || defaultChangeHandler}
         className={cn(DEFAULT_CHECKBOX_CLASSES, ERROR_CLASSES, className)}
-        value={`${value || defaultCheckedState}`}
+        value={checked || defaultChecked ? 'on' : 'off'}
         onBlur={() => setIsTouched(true)}
         ref={ref}
         {...props}
@@ -59,7 +46,7 @@ const Checkbox = forwardRef<
         <CheckboxPrimitive.Indicator
           className={DEFAULT_CHECKBOX_INDICATOR_CLASSES}
         >
-          {(checked || defaultCheckedState) && (
+          {(checked || defaultChecked) && (
             <Check size={ICON_SIZE} strokeWidth={ICON_STROKE_WIDTH} />
           )}
         </CheckboxPrimitive.Indicator>
