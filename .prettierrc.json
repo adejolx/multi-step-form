@@ -7,7 +7,6 @@
     "^react",
     "<THIRD_PARTY_MODULES>",
     "<TYPES>",
-    "^(#|#components|#assets|#utils|#store)(/.*)$",
     "",
     "^(?!.*[.]css$)[./].*$",
     ".css$"
