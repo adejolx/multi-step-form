@@ -25,7 +25,7 @@ const Option = forwardRef<
       <label
         className={cn(
           `min-w-full flex items-center gap-6 border-2 border-gray-300/50 px-6 py-3 rounded-md normal-case`,
-          isChecked && ' bg-gray-200/50 border-blue-300/50',
+          isChecked && ' bg-blue-200/10 border-blue-300/50',
         )}
         htmlFor={name}
       >

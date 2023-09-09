@@ -26,7 +26,7 @@ const Card = ({
     <label
       className={cn(
         'border-2 border-gray-300/50 px-6 py-4 rounded-md flex gap-4  md:flex-col md:gap-8',
-        checked && 'bg-gray-200/50 border-blue-300/50',
+        checked && 'bg-blue-200/10 border-blue-300/50',
       )}
       htmlFor={value}
     >
