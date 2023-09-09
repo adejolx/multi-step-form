@@ -23,16 +23,7 @@ const Card = ({
   ...props
 }: CardProps) => {
   return (
-    <label
-      className={cn(
-        'border-2 border-gray-300/50 px-6 py-4 rounded-md flex gap-4  md:flex-col md:gap-8',
-        checked && 'bg-blue-200/10 border-blue-300/50',
-      )}
-      htmlFor={value}
-    >
-      <div className="flex items-center justify-center">
-        <img src={imgUrl} alt="" aria-hidden />
-      </div>
+    <>
       <input
         type="radio"
         id={value}
@@ -43,14 +34,26 @@ const Card = ({
         onChange={onChange}
         {...props}
       />
-      <span className="flex flex-col items-start">
-        <span className="text-blue-400 font-bold">{title}</span>
-        <span className="text-gray-400">{description}</span>
-        {duration === 'yearly' && (
-          <span className="text-sm text-blue-400">2 months free</span>
+      <label
+        className={cn(
+          'border-2 border-gray-300/50 px-6 py-4 rounded-md flex gap-4 md:flex-col md:gap-8 [:focus_+_&]:outline [:focus_+_&]:outline-2 [:focus_+_&]:outline-blue-100 [:hover_+_&]:outline [:hover_+_&]:outline-2 [:hover_+_&]:outline-blue-100',
+          checked && 'bg-blue-200/10 border-blue-300/50',
         )}
-      </span>
-    </label>
+        htmlFor={value}
+      >
+        <div className="flex items-center justify-center">
+          <img src={imgUrl} alt="" aria-hidden />
+        </div>
+
+        <span className="flex flex-col items-start">
+          <span className="text-blue-400 font-bold">{title}</span>
+          <span className="text-gray-400">{description}</span>
+          {duration === 'yearly' && (
+            <span className="text-sm text-blue-400">2 months free</span>
+          )}
+        </span>
+      </label>
+    </>
   );
 };
 
