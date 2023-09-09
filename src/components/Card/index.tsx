@@ -1,20 +1,22 @@
 import { cn } from 'utils';
 
-type CardProps = {
+interface CardProps extends React.HTMLAttributes<HTMLInputElement> {
   imgUrl: string;
   value: string;
   title: string;
   description: string;
+  duration: 'monthly' | 'yearly';
   name: string;
   checked: boolean;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
-} & React.HTMLAttributes<HTMLInputElement>;
+}
 
 const Card = ({
   imgUrl,
   value,
   title,
   description,
+  duration = 'monthly',
   name,
   checked,
   onChange,
@@ -23,12 +25,14 @@ const Card = ({
   return (
     <label
       className={cn(
-        'block border-2 border-gray-300/50 px-6 py-4 rounded-md',
+        'border-2 border-gray-300/50 px-6 py-4 rounded-md flex gap-4  md:flex-col md:gap-8',
         checked && 'bg-gray-200/50 border-blue-300/50',
       )}
       htmlFor={value}
     >
-      <img src={imgUrl} alt="" aria-hidden />
+      <div className="flex items-center justify-center">
+        <img src={imgUrl} alt="" aria-hidden />
+      </div>
       <input
         type="radio"
         id={value}
@@ -42,6 +46,9 @@ const Card = ({
       <span className="flex flex-col items-start">
         <span className="text-blue-400 font-bold">{title}</span>
         <span className="text-gray-400">{description}</span>
+        {duration === 'yearly' && (
+          <span className="text-sm text-blue-400">2 months free</span>
+        )}
       </span>
     </label>
   );
