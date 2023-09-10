@@ -5,6 +5,10 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,md,jsx,tsx,mdx}'],
   theme: {
     extend: {
+      backgroundImage: {
+        sidebarMobile: 'url("src/assets/bg-sidebar-mobile.svg")',
+        sidebarDesktop: 'url("src/assets/bg-sidebar-desktop.svg")',
+      },
       colors: {
         blue: {
           100: 'hsl(var(--light-blue) / <alpha-value>)',
