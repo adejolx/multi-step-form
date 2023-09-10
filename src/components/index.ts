@@ -9,6 +9,6 @@ export * from './Form';
 export * from './Input';
 export * from './Option';
 export * from './Panel';
-export * from './Stage';
+export * from './Step';
 export * from './Switch';
 export * from './Terminal';
