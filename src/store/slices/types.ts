@@ -6,8 +6,18 @@ export type FormSliceType = {
     name: string;
     email: string;
     phone: string;
-    plan: Record<PlanType, boolean>;
-    addOns: Record<AddOnType, boolean>;
+    plan: Array<{
+      name: PlanType;
+      value: boolean;
+      currency: 'USD';
+      price: { monthly: number; yearly: number };
+    }>;
+    addOns: Array<{
+      name: AddOnType;
+      value: boolean;
+      currency: 'USD';
+      price: { monthly: number; yearly: number };
+    }>;
     totalAmount: number;
   };
 };
