@@ -20,7 +20,7 @@ const Button = ({
       'bg-blue-400 hover:bg-opacity-80 focus:outline-blue-400',
     variant === 'terminal' &&
       'bg-blue-300 hover:bg-opacity-70 focus:outline-blue-300',
-    'bg-transparent text-gray-400',
+    variant === 'ghost' && 'bg-transparent text-gray-400',
     'text-white font-medium capitalize',
   );
   return (

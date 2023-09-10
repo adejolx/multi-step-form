@@ -31,6 +31,10 @@
         var(--switch-thumb-offset-x)
     );
   }
+
+  html {
+    @apply text-gray-400;
+  }
 }
 
 @layer utilities {

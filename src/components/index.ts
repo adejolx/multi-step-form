@@ -1,4 +1,6 @@
 export * from './Aside';
+export * from './Main';
+export * from './FrontMatter';
 export * from './Button';
 export * from './Card';
 export * from './Checkbox';

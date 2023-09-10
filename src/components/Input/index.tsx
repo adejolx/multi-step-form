@@ -42,7 +42,7 @@ const Input: React.FC<InputProps> = ({
       <label htmlFor={name} className="block text-start text-sm text-blue-400">
         {label}
       </label>
-      <div className="relative w-fit">
+      <div className="relative">
         <input
           id={id || name}
           name={name}
