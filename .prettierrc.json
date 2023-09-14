@@ -6,7 +6,6 @@
     "<BUILTIN_MODULES>",
     "^react",
     "<THIRD_PARTY_MODULES>",
-    "<TYPES>",
     "",
     "^(?!.*[.]css$)[./].*$",
     ".css$"
