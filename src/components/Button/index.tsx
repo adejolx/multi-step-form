@@ -15,13 +15,13 @@ const Button = ({
   ...props
 }: ButtonProps) => {
   const DEFAULT_BUTTON_CLASSES = cn(
-    'px-6 py-3 rounded-md transition-colors focus:outline focus:outline-offset-2 focus:outline-2i',
+    'px-6 py-3 rounded-md transition-colors focus:outline focus:outline-offset-2 focus:outline-1 text-white font-medium capitalize',
     variant === 'normal' &&
       'bg-blue-400 hover:bg-opacity-80 focus:outline-blue-400',
     variant === 'terminal' &&
       'bg-blue-300 hover:bg-opacity-70 focus:outline-blue-300',
-    variant === 'ghost' && 'bg-transparent text-gray-400',
-    'text-white font-medium capitalize',
+    variant === 'ghost' &&
+      'bg-transparent hover:outline hover:outline-1 hover:outline-offset-2 text-gray-400',
   );
   return (
     <button

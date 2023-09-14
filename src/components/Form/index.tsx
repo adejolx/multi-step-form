@@ -1,14 +1,13 @@
+import { useStore } from 'store/useStore';
 import { useForm } from 'utils';
 
-import AddOn from './_components/AddOn';
-import Info from './_components/Info';
-import Plan from './_components/Plan';
+import AddOnsContainer from './_components/AddOnsContainer';
+import InfoFieldsContainer from './_components/InfoFieldsContainer';
+import PlansContainer from './_components/PlansContainer';
 
 type FormProps = {
   className?: string;
 };
-
-const stage: number = 0;
 
 const initialState = {
   name: '',
@@ -36,6 +35,7 @@ const validationFn = (state: typeof initialState) => {
 };
 
 const Form = ({ className }: FormProps) => {
+  const currentStep = useStore((state) => state.currentStep);
   const { handleChange, handleBlur, formState } = useForm(
     initialState,
     validationFn,
@@ -44,7 +44,10 @@ const Form = ({ className }: FormProps) => {
   return (
     <>
       <form action="" className={className}>
-        {switchFormsByStage({ handleChange, handleBlur, formState })}
+        {switchFormsByStage(
+          { handleChange, handleBlur, formState },
+          currentStep,
+        )}
       </form>
     </>
   );
@@ -52,15 +55,17 @@ const Form = ({ className }: FormProps) => {
 
 const switchFormsByStage = (
   formUtils: ReturnType<typeof useForm<typeof initialState>>,
+  step: number,
 ) => {
-  switch (stage) {
+  switch (step) {
+    case 0:
+      return <InfoFieldsContainer {...formUtils} />;
     case 1:
-    default:
-      return <Info {...formUtils} />;
+      return <PlansContainer />;
     case 2:
-      return <Plan />;
-    case 3:
-      return <AddOn />;
+      return <AddOnsContainer />;
+    default:
+      return;
   }
 };
 

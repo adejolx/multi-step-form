@@ -16,11 +16,11 @@ const Step: React.FC<StepProps> = ({
     <div className="flex items-center gap-4 text-gray-200">
       <button
         className={cn(
-          'w-10 h-10 rounded-full border-[1.5px] border-gray-200 font-bold hover:bg-blue-100 hover:text-blue-400 transition-colors',
+          'w-10 h-10 rounded-full border-[1.5px] border-gray-200 font-bold hover:bg-blue-100 hover:text-blue-400 focus:outline-dashed focus:outline-2 focus:outline-offset-2 focus:outline-blue-100 transition-colors',
           className,
         )}
         onClick={onStepChange}
-        aria-label={`Go to step ${step}`}
+        aria-label={`Go to step ${step}: ${title}`}
       >
         {step}
       </button>

@@ -1,4 +1,7 @@
-import { Stage } from '../Stage';
+import { useStore } from 'store/useStore';
+import { cn } from 'utils';
+
+import { Step } from '../Step';
 
 const stepsArray: Array<{ step: number; title: string }> = [
   {
@@ -19,16 +22,28 @@ const stepsArray: Array<{ step: number; title: string }> = [
   },
 ];
 
-const Aside = () => {
+interface AsideProps {
+  className: string;
+}
+const Aside = ({ className }: AsideProps) => {
+  const { currentStep, setCurrentStep } = useStore((state) => state);
   return (
-    <ul className="flex justify-center gap-4 bg-blue-300 bg-sidebarMobile bg-origin-border bg-center bg-no-repeat bg-cover md:block md:space-y-8 md:bg-sidebarDesktop px-8 pt-8 pb-12">
-      {stepsArray.map(({ step, title }) => {
+    <ul
+      className={cn(
+        'flex justify-center gap-4 bg-blue-300 bg-sidebarMobile bg-origin-border bg-center bg-no-repeat bg-cover md:block md:space-y-8 md:bg-sidebarDesktop px-8 pt-8 pb-12',
+        className,
+      )}
+    >
+      {stepsArray.map(({ step, title }, index) => {
         return (
           <li key={title}>
-            <Stage
+            <Step
               step={step}
               title={title}
-              onStepChange={() => console.log(step)}
+              onStepChange={() => setCurrentStep(index)}
+              className={
+                currentStep === index ? 'bg-blue-100 text-blue-400' : ''
+              }
             />
           </li>
         );

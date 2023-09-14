@@ -1,32 +1,28 @@
-type PlanType = 'arcade' | 'advanced' | 'pro';
-type AddOnType = 'onlineService' | 'largerStorage' | 'customizableProfile';
+export type PlanType = 'arcade' | 'advanced' | 'pro';
+export type AddOnType =
+  | 'onlineService'
+  | 'largerStorage'
+  | 'customizableProfile';
 
 export type FormSliceType = {
-  data: {
-    name: string;
-    email: string;
-    phone: string;
-    plan: Array<{
-      name: PlanType;
-      value: boolean;
-      currency: 'USD';
-      price: { monthly: number; yearly: number };
-    }>;
-    addOns: Array<{
-      name: AddOnType;
-      value: boolean;
-      currency: 'USD';
-      price: { monthly: number; yearly: number };
-    }>;
-    totalAmount: number;
-  };
+  name: string;
+  email: string;
+  phone: string;
+  subscriptionPlan: 'monthly' | 'yearly';
+  setSubscriptionPlan: (isChecked: boolean) => void;
+  addOnOptions: Array<AddOnType>;
+  planOption: PlanType;
+  onPlanChange: (newPlan: PlanType) => void;
+  onAddOnChange: (newAddOn: AddOnType, isChecked: boolean) => void;
+  totalAmount: number;
+  setTotalAmount: () => void;
 };
 
 export type ModalSliceType = {
-  currentPosition: number;
-  numberOfStages: number;
-  incrementCurrentPosition: () => void;
-  decrementCurrentPosition: () => void;
+  currentStep: number;
+  setCurrentStep: (index: number) => void;
+  incrementCurrentStep: () => void;
+  decrementCurrentStep: () => void;
 };
 
 export type StoreType = FormSliceType & ModalSliceType;
