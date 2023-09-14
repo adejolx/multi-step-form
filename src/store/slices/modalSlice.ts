@@ -1,4 +1,5 @@
 import { StateCreator } from 'zustand';
+
 import { ModalSliceType, StoreType } from './types';
 
 export const createModalSlice: StateCreator<
@@ -7,18 +8,17 @@ export const createModalSlice: StateCreator<
   [],
   ModalSliceType
 > = (set) => ({
-  currentPosition: 0,
-  numberOfStages: 0,
-  incrementCurrentPosition: () =>
-    set(({ currentPosition, numberOfStages }) => ({
-      currentPosition:
-        currentPosition < numberOfStages
-          ? currentPosition + 1
-          : currentPosition,
+  currentStep: 0,
+  setCurrentStep: (index: number) =>
+    set(() => ({
+      currentStep: index,
     })),
-  decrementCurrentPosition: () =>
-    set(({ currentPosition }) => ({
-      currentPosition:
-        currentPosition > 0 ? currentPosition - 1 : currentPosition,
+  incrementCurrentStep: () =>
+    set(({ currentStep }) => ({
+      currentStep: currentStep + 1,
+    })),
+  decrementCurrentStep: () =>
+    set(({ currentStep }) => ({
+      currentStep: currentStep - 1,
     })),
 });
