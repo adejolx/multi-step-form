@@ -1,50 +1,8 @@
-import advancedSvg from 'assets/icon-advanced.svg';
-import arcadeSvg from 'assets/icon-arcade.svg';
-import proSvg from 'assets/icon-pro.svg';
-import { FrontMatter, Plan, PlanProps, Switch } from 'components';
+import { FrontMatter, Plan, Switch } from 'components';
 import { PlanType } from 'store/slices/types';
 import { useStore } from 'store/useStore';
 
-const switchPlanSubscription = (subscriptionPlan: 'monthly' | 'yearly') => {
-  switch (subscriptionPlan) {
-    case 'yearly':
-      return {
-        arcade: 10,
-        advanced: 20,
-        pro: 20,
-      };
-    case 'monthly':
-    default:
-      return {
-        arcade: 1,
-        advanced: 2,
-        pro: 2,
-      };
-  }
-};
-
-const planPropsList: Array<
-  Omit<PlanProps, 'onChange' | 'checked' | 'description' | 'price'>
-> = [
-  {
-    imgUrl: arcadeSvg,
-    title: 'Arcade',
-    value: 'arcade',
-    name: 'plan',
-  },
-  {
-    imgUrl: advancedSvg,
-    title: 'Advanced',
-    value: 'advanced',
-    name: 'plan',
-  },
-  {
-    imgUrl: proSvg,
-    title: 'Pro',
-    value: 'pro',
-    name: 'plan',
-  },
-];
+import { planPropsList, switchPlanSubscription } from './data';
 
 const PlansContainer = () => {
   const { onPlanChange, subscriptionPlan, setSubscriptionPlan, planOption } =
