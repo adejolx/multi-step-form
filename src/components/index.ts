@@ -8,7 +8,6 @@ export * from './Container';
 export * from './Form';
 export * from './Input';
 export * from './AddOn';
-export * from './Panel';
+export * from './Summary';
 export * from './Step';
 export * from './Switch';
-export * from './Terminal';
