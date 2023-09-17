@@ -21,6 +21,7 @@ interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
   type?: HTMLInputTypeAttribute;
   required?: boolean;
   error?: string;
+  value: string;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -30,6 +31,7 @@ const Input: React.FC<InputProps> = ({
   className,
   type = 'text',
   error,
+  value,
   required = false,
   ...otherProps
 }) => {
@@ -46,6 +48,7 @@ const Input: React.FC<InputProps> = ({
         <input
           id={id || name}
           name={name}
+          value={value}
           type="text"
           placeholder={defaultPlaceholder}
           required={required}

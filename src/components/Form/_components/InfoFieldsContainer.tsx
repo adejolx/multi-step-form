@@ -55,6 +55,7 @@ const InfoFieldsContainer = () => {
           }
           error={touched.name && errors.name ? errors.name : ''}
           className="w-full"
+          value={userInfo.name}
         />
         <Input
           label="Email Address"
@@ -69,6 +70,7 @@ const InfoFieldsContainer = () => {
           }
           error={touched.email && errors.email ? errors.email : ''}
           className="w-full"
+          value={userInfo.email}
         />
 
         <Input
@@ -84,6 +86,7 @@ const InfoFieldsContainer = () => {
           }
           error={touched.phone && errors.phone ? errors.phone : ''}
           className="w-full"
+          value={userInfo.phone}
         />
       </div>
     </>
