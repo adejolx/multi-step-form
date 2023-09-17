@@ -1,3 +1,3 @@
 export * from './tw-classname-resolver';
-export * from './useForm';
+export * from './input-validation';
 export * from './text-formatting';
