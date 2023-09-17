@@ -31,7 +31,7 @@ export const createUserInfoSlice: StateCreator<
     set(({ touched }) => ({
       touched: { ...touched, ...newtouched },
     })),
-  setAllTouchedToTrue: () =>
+  triggerAllUntouched: () =>
     set(({ touched }) => ({
       touched: { ...touched, ...{ name: true, email: true, phone: true } },
     })),

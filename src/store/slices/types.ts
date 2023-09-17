@@ -20,7 +20,7 @@ export interface UserInfoSliceType {
   setTouched: (
     newtouched: Partial<Record<keyof UserInfoType, boolean>>,
   ) => void;
-  setAllTouchedToTrue: () => void;
+  triggerAllUntouched: () => void;
 }
 
 export interface PlanSliceType {

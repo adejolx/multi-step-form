@@ -13,11 +13,11 @@ const validationFn = (state: UserInfoType) => {
 
   if (!state.email) errors.email = 'This field is required';
   if (state.email && !emailRegex.test(state.email))
-    errors.email = 'errors email';
+    errors.email = 'invalid email';
 
   if (!state.phone) errors.phone = 'This field is required';
   if (state.phone && !phoneephoneRegex.test(state.phone))
-    errors.phone = 'errors phone number';
+    errors.phone = 'invalid phone number';
 
   return errors;
 };
