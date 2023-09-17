@@ -1,28 +1,53 @@
 export type PlanType = 'arcade' | 'advanced' | 'pro';
-export type AddOnType =
-  | 'onlineService'
-  | 'largerStorage'
-  | 'customizableProfile';
 
-export type FormSliceType = {
+export type AddOnType =
+  | 'online_service'
+  | 'larger_storage'
+  | 'customizable_profile';
+
+export type UserInfoType = {
   name: string;
   email: string;
   phone: string;
-  subscriptionPlan: 'monthly' | 'yearly';
-  setSubscriptionPlan: (isChecked: boolean) => void;
-  addOnOptions: Array<AddOnType>;
-  planOption: PlanType;
-  onPlanChange: (newPlan: PlanType) => void;
-  onAddOnChange: (newAddOn: AddOnType, isChecked: boolean) => void;
-  totalAmount: number;
-  setTotalAmount: () => void;
 };
 
-export type ModalSliceType = {
+export interface UserInfoSliceType {
+  userInfo: UserInfoType;
+  errors: Partial<UserInfoType>;
+  touched: Record<keyof UserInfoType, boolean>;
+  setUserInfo: (newUserInfo: Partial<UserInfoType>) => void;
+  setErrors: (newErrors: Partial<UserInfoType>) => void;
+  setTouched: (
+    newtouched: Partial<Record<keyof UserInfoType, boolean>>,
+  ) => void;
+  setAllTouchedToTrue: () => void;
+}
+
+export interface PlanSliceType {
+  planOption: PlanType;
+  onPlanChange: (newPlan: PlanType) => void;
+}
+
+export interface AddOnSliceType {
+  addOnOptions: Array<AddOnType>;
+  onAddOnChange: (newAddOn: AddOnType, isChecked: boolean) => void;
+}
+
+export interface FormSliceType {
+  subscriptionPlan: 'monthly' | 'yearly';
+  setSubscriptionPlan: (isChecked: boolean) => void;
+}
+
+export interface ModalSliceType {
   currentStep: number;
   setCurrentStep: (index: number) => void;
   incrementCurrentStep: () => void;
   decrementCurrentStep: () => void;
-};
+}
 
-export type StoreType = FormSliceType & ModalSliceType;
+export interface StoreType
+  extends FormSliceType,
+    ModalSliceType,
+    UserInfoSliceType,
+    AddOnSliceType,
+    PlanSliceType {}
