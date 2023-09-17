@@ -46,4 +46,15 @@
   .required {
     border: 2px solid red;
   }
+
+  @media (max-width: 768px) {
+    .aside {
+      display: grid;
+      grid-template-columns: subgrid;
+      grid-template-rows: subgrid;
+    }
+    .aside__step-list {
+      grid-column: 1 / -1;
+    }
+  }
 }
