@@ -2,12 +2,12 @@ import { FrontMatter, Plan, Switch } from 'components';
 import { PlanType } from 'store/slices/types';
 import { useStore } from 'store/useStore';
 
-import { planPropsList, switchPlanSubscription } from './data';
+import { planPropsList, switchPlanPricing } from './data';
 
 const PlansContainer = () => {
   const { onPlanChange, subscriptionPlan, setSubscriptionPlan, planOption } =
     useStore((state) => state);
-  const planSubscription = switchPlanSubscription(subscriptionPlan);
+  const planPricing = switchPlanPricing(subscriptionPlan);
 
   return (
     <>
@@ -17,16 +17,17 @@ const PlansContainer = () => {
       />
       <div className="space-y-8">
         <ul className="grid gap-4 md:grid-flow-col md:auto-cols-fr">
-          {planPropsList.map((planProps) => {
+          {planPropsList.map(({ value, ...others }) => {
             return (
-              <li key={planProps.value}>
+              <li key={value}>
                 <Plan
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                     onPlanChange(e.target.value as PlanType)
                   }
-                  checked={planProps.value === planOption}
-                  price={planSubscription[planProps.value]}
-                  {...planProps}
+                  checked={value === planOption}
+                  value={value}
+                  price={planPricing[value]}
+                  {...others}
                 />
               </li>
             );

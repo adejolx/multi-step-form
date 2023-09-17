@@ -3,66 +3,62 @@ import arcadeSvg from 'assets/icon-arcade.svg';
 import proSvg from 'assets/icon-pro.svg';
 import { AddOnProps, PlanProps } from 'components';
 
-export const switchAddOnSubscriptionPlan = (
-  subscriptionPlan: 'monthly' | 'yearly',
-) => {
+export const switchAddOnPricing = (subscriptionPlan: 'monthly' | 'yearly') => {
   switch (subscriptionPlan) {
     case 'yearly':
       return {
-        onlineService: 10,
-        largerStorage: 20,
-        customizableProfile: 20,
+        online_service: 10,
+        larger_storage: 20,
+        customizable_profile: 20,
       };
     case 'monthly':
     default:
       return {
-        onlineService: 1,
-        largerStorage: 2,
-        customizableProfile: 2,
+        online_service: 1,
+        larger_storage: 2,
+        customizable_profile: 2,
       };
   }
 };
 
-export const switchPlanSubscription = (
-  subscriptionPlan: 'monthly' | 'yearly',
-) => {
+export const switchPlanPricing = (subscriptionPlan: 'monthly' | 'yearly') => {
   switch (subscriptionPlan) {
     case 'yearly':
       return {
-        arcade: 10,
-        advanced: 20,
-        pro: 20,
+        arcade: 90,
+        advanced: 120,
+        pro: 150,
       };
     case 'monthly':
     default:
       return {
-        arcade: 1,
-        advanced: 2,
-        pro: 2,
+        arcade: 9,
+        advanced: 12,
+        pro: 15,
       };
   }
 };
 
 export const addOnPropsList: Array<
-  Omit<AddOnProps, 'price' | 'isChecked' | 'onCheckedChange'>
+  Omit<AddOnProps, 'isChecked' | 'onCheckedChange' | 'price'>
 > = [
   {
     title: 'Online service',
     description: 'Access to multiplayer games',
     name: 'addOn',
-    value: 'onlineService',
+    value: 'online_service',
   },
   {
     title: 'Larger Storage',
     description: 'Extra 1TB of cloud save',
     name: 'addOn',
-    value: 'largerStorage',
+    value: 'larger_storage',
   },
   {
     title: 'Customizable Profile',
     description: 'Custom theme on your profile',
     name: 'addOn',
-    value: 'customizableProfile',
+    value: 'customizable_profile',
   },
 ];
 

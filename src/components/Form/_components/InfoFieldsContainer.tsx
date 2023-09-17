@@ -1,24 +1,41 @@
+import { useEffect } from 'react';
 import { FrontMatter, Input } from 'components';
+import { UserInfoType } from 'store/slices/types';
+import { useStore } from 'store/useStore';
 
-interface useFormType {
-  formState: {
-    value: {
-      name: string;
-      email: string;
-      tel: string;
-    };
-    touched: Partial<Record<'name' | 'email' | 'tel', boolean>>;
-    errors: Partial<Record<'name' | 'email' | 'tel', string>>;
-  };
-  handleBlur: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+const validationFn = (state: UserInfoType) => {
+  const errors: Partial<UserInfoType> = {};
+  const emailRegex =
+    /^[\w-]+(\.[\w-]+)*@[a-zA-Z\d-]+(\.[a-zA-Z\d-]+)*\.[a-zA-Z]{1,}$/;
+  const phoneephoneRegex = /^\+\d{9,13}$/;
 
-const InfoFieldsContainer = ({
-  handleBlur,
-  handleChange,
-  formState,
-}: useFormType) => {
+  if (!state.name) errors.name = 'This field is required';
+
+  if (!state.email) errors.email = 'This field is required';
+  if (state.email && !emailRegex.test(state.email))
+    errors.email = 'errors email';
+
+  if (!state.phone) errors.phone = 'This field is required';
+  if (state.phone && !phoneephoneRegex.test(state.phone))
+    errors.phone = 'errors phone number';
+
+  return errors;
+};
+
+const InfoFieldsContainer = () => {
+  const { userInfo, setErrors, setUserInfo, setTouched, touched, errors } =
+    useStore((state) => state);
+
+  useEffect(() => {
+    setErrors(validationFn(userInfo));
+  }, [
+    userInfo.name,
+    userInfo.email,
+    userInfo.phone,
+    touched.name,
+    touched.email,
+    touched.phone,
+  ]);
   return (
     <>
       <FrontMatter
@@ -30,13 +47,13 @@ const InfoFieldsContainer = ({
           label="Name"
           name="name"
           required
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={
-            formState.touched.name && formState.errors.name
-              ? formState.errors.name
-              : ''
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setUserInfo({ [e.target.name]: e.target.value })
           }
+          onBlur={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setTouched({ [e.target.name]: true })
+          }
+          error={touched.name && errors.name ? errors.name : ''}
           className="w-full"
         />
         <Input
@@ -44,28 +61,28 @@ const InfoFieldsContainer = ({
           name="email"
           type="email"
           required
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={
-            formState.touched.email && formState.errors.email
-              ? formState.errors.email
-              : ''
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setUserInfo({ [e.target.name]: e.target.value })
           }
+          onBlur={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setTouched({ [e.target.name]: true })
+          }
+          error={touched.email && errors.email ? errors.email : ''}
           className="w-full"
         />
 
         <Input
           label="Phone Number"
-          name="tel"
+          name="phone"
           type="tel"
           required
-          onChange={handleChange}
-          onBlur={handleBlur}
-          error={
-            formState.touched.tel && formState.errors.tel
-              ? formState.errors.tel
-              : ''
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setUserInfo({ [e.target.name]: e.target.value })
           }
+          onBlur={(e: React.ChangeEvent<HTMLInputElement>) =>
+            setTouched({ [e.target.name]: true })
+          }
+          error={touched.phone && errors.phone ? errors.phone : ''}
           className="w-full"
         />
       </div>

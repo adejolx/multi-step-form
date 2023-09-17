@@ -1,13 +1,13 @@
 import { AddOn, FrontMatter } from 'components';
 import { useStore } from 'store/useStore';
 
-import { addOnPropsList, switchAddOnSubscriptionPlan } from './data';
+import { addOnPropsList, switchAddOnPricing } from './data';
 
 const AddOnsContainer = () => {
   const { addOnOptions, onAddOnChange, subscriptionPlan } = useStore(
     (state) => state,
   );
-  const addOnPlan = switchAddOnSubscriptionPlan(subscriptionPlan);
+  const addOnPricing = switchAddOnPricing(subscriptionPlan);
 
   return (
     <>
@@ -16,16 +16,18 @@ const AddOnsContainer = () => {
         description="Add-ons help enhance your gaming experience"
       />
       <ul className="space-y-4">
-        {addOnPropsList.map((addOnProps, index) => {
+        {addOnPropsList.map(({ title, value, ...others }) => {
           return (
-            <li key={addOnProps.title}>
+            <li key={title}>
               <AddOn
-                isChecked={addOnOptions.includes(addOnProps.value)}
+                isChecked={addOnOptions.includes(value)}
                 onCheckedChange={(checked) =>
-                  onAddOnChange(addOnProps.value, checked as boolean)
+                  onAddOnChange(value, checked as boolean)
                 }
-                price={addOnPlan[addOnProps.value]}
-                {...addOnProps}
+                title={title}
+                value={value}
+                price={addOnPricing[value]}
+                {...others}
               />
             </li>
           );
