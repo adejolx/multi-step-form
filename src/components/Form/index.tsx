@@ -13,9 +13,7 @@ const Form = ({ className }: FormProps) => {
 
   return (
     <>
-      <form action="" className={className}>
-        {switchFormsByStep(currentStep)}
-      </form>
+      <form className={className}>{switchFormsByStep(currentStep)}</form>
     </>
   );
 };

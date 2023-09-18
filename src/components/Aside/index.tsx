@@ -36,7 +36,7 @@ const Aside = ({ className }: AsideProps) => {
   const inputIsValid = checkInputValidity(userInfo, errors);
 
   return (
-    <div
+    <aside
       className={cn(
         'bg-blue-300 bg-sidebarMobile bg-origin-border bg-center bg-no-repeat bg-cover md:bg-sidebarDesktop px-8 pt-8 pb-8',
         className,
@@ -67,7 +67,7 @@ const Aside = ({ className }: AsideProps) => {
           );
         })}
       </ul>
-    </div>
+    </aside>
   );
 };
 

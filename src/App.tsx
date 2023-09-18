@@ -4,6 +4,8 @@ import { checkInputValidity } from 'utils';
 
 import './App.css';
 
+import { useEffect, useRef } from 'react';
+
 function App() {
   const TOTAL_STEPS = 4;
   const {
@@ -15,9 +17,34 @@ function App() {
     userInfo,
     errors,
     triggerAllUntouched,
+    planOption,
+    addOnOptions,
+    subscriptionPlan,
   } = useStore((state) => state);
   const inputIsValid = checkInputValidity(userInfo, errors);
   const isLastStep = currentStep === TOTAL_STEPS - 1;
+  const handleForwardClick = () => {
+    if (!isLastStep && inputIsValid) incrementCurrentStep();
+    else triggerAllUntouched();
+    if (isLastStep) {
+      setSubscriptionConfirmation();
+      alert(
+        JSON.stringify(
+          {
+            user_name: userInfo.name,
+            user_email: userInfo.email,
+            user_phone: userInfo.phone,
+            subscription_plan: subscriptionPlan,
+            selected_plan: planOption,
+            selected_addons: addOnOptions,
+          },
+          null,
+          2,
+        ),
+      );
+    }
+  };
+
   return (
     <div className="h-full grid md:place-content-center bg-gray-200">
       <Container className="grid grid-cols-container-sm md:grid-cols-container-md md:rounded-2xl md:bg-white md:py-[1rem] md:w-[1024px] md:h-[640px] md:shadow-2xl">
@@ -26,7 +53,7 @@ function App() {
           {isLastStep ? <Summary /> : <Form />}
         </Main>
         {!subscriptionIsConfirmed && (
-          <div className="flex justify-between bg-white col-span-full self-end mt-20 p-[1rem] md:col-start-3 md:col-span-1 md:row-start-2 md:px-24">
+          <footer className="flex justify-between bg-white col-span-full self-end mt-20 p-[1rem] md:col-start-3 md:col-span-1 md:row-start-2 md:px-24">
             {currentStep > 0 && (
               <Button
                 variant="ghost"
@@ -40,15 +67,11 @@ function App() {
             <Button
               className="ml-auto"
               variant={isLastStep ? 'terminal' : 'normal'}
-              onClick={() => {
-                if (!isLastStep && inputIsValid) incrementCurrentStep();
-                else triggerAllUntouched();
-                if (isLastStep) setSubscriptionConfirmation();
-              }}
+              onClick={handleForwardClick}
             >
               next step
             </Button>
-          </div>
+          </footer>
         )}
       </Container>
     </div>

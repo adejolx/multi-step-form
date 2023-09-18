@@ -54,7 +54,7 @@ const Input: React.FC<InputProps> = ({
           required={required}
           aria-required={required}
           aria-invalid={error ? true : false}
-          aria-describedby="invalid-input"
+          aria-describedby={`invalid-${name}-input`}
           className={cn(
             'block px-4 py-2 border-gray-300 border-[1.5px] focus:outline focus:outline-transparent focus:border-[1.5px] focus:border-blue-300 rounded-md placeholder:text-gray-400 font-medium text-blue-400',
             ERROR_CLASSES,
@@ -63,7 +63,7 @@ const Input: React.FC<InputProps> = ({
           {...otherProps}
         />
         <span
-          id="invalid-input"
+          id={`invalid-${name}-input`}
           className={cn(
             'text-red-100 text-sm font-bold absolute right-0 bottom-[calc(100%+0.25rem)]',
             !(error && required) && 'sr-only',

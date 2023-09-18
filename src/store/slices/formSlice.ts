@@ -10,11 +10,4 @@ export const createFormSlice: StateCreator<StoreType, [], [], FormSliceType> = (
     set(() => ({
       subscriptionPlan: !isChecked ? 'monthly' : 'yearly',
     })),
-  // setValidInputStatus: () =>
-  //   set(({ validInputStatus }) => ({
-  //     validInputStatus: !validInputStatus,
-  //   })),
-  // onBlur: (validationFn, name) => set(({userInfo, userInfoError}) => ({
-  //   userInfoError: {...userInfoError, [name]: validationFn(userInfo[name])}
-  // }))
 });
