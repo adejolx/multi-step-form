@@ -6,8 +6,8 @@ export default {
   theme: {
     extend: {
       backgroundImage: {
-        sidebarMobile: 'url("src/assets/bg-sidebar-mobile.svg")',
-        sidebarDesktop: 'url("src/assets/bg-sidebar-desktop.svg")',
+        sidebarMobile: 'url("/src/assets/bg-sidebar-mobile.svg")',
+        sidebarDesktop: 'url("/src/assets/bg-sidebar-desktop.svg")',
       },
       colors: {
         blue: {
