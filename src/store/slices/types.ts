@@ -40,6 +40,8 @@ export interface FormSliceType {
 
 export interface ModalSliceType {
   currentStep: number;
+  subscriptionIsConfirmed: boolean;
+  setSubscriptionConfirmation: () => void;
   setCurrentStep: (index: number) => void;
   incrementCurrentStep: () => void;
   decrementCurrentStep: () => void;

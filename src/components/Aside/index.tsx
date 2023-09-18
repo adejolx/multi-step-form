@@ -26,9 +26,13 @@ interface AsideProps {
   className: string;
 }
 const Aside = ({ className }: AsideProps) => {
-  const { currentStep, setCurrentStep, userInfo, errors } = useStore(
-    (state) => state,
-  );
+  const {
+    currentStep,
+    setCurrentStep,
+    subscriptionIsConfirmed,
+    userInfo,
+    errors,
+  } = useStore((state) => state);
   const inputIsValid = checkInputValidity(userInfo, errors);
 
   return (
@@ -52,7 +56,8 @@ const Aside = ({ className }: AsideProps) => {
                 step={step}
                 title={title}
                 onStepChange={() => {
-                  if (inputIsValid) setCurrentStep(index);
+                  if (inputIsValid && !subscriptionIsConfirmed)
+                    setCurrentStep(index);
                 }}
                 className={
                   currentStep === index ? 'bg-blue-100 text-blue-400' : ''

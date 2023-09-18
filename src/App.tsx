@@ -9,42 +9,47 @@ function App() {
   const {
     incrementCurrentStep,
     decrementCurrentStep,
+    setSubscriptionConfirmation,
+    subscriptionIsConfirmed,
     currentStep,
     userInfo,
     errors,
     triggerAllUntouched,
   } = useStore((state) => state);
   const inputIsValid = checkInputValidity(userInfo, errors);
-
+  const isLastStep = currentStep === TOTAL_STEPS - 1;
   return (
     <div className="h-full grid md:place-content-center bg-gray-200">
       <Container className="grid grid-cols-container-sm md:grid-cols-container-md md:rounded-2xl md:bg-white md:py-[1rem] md:w-[1024px] md:h-[640px]">
         <Aside className="col-span-full row-start-1 row-end-3 md:rounded-xl md:col-start-2 md:col-span-1" />
-        <Main className="py-8 px-6 bg-white space-y-24 col-start-2 col-span-1 row-start-2 row-end-10 self-start rounded-lg md:px-24 md:row-span-1 md:col-start-3 md:col-span-1 md:rounded-none">
-          {currentStep === TOTAL_STEPS - 1 ? <Summary /> : <Form />}
+        <Main className="py-8 px-6 bg-white space-y-24 col-start-2 col-span-1 row-start-2 row-end-10 self-start rounded-lg md:px-24 md:row-start-1 md:row-end-3 md:col-start-3 md:col-span-1 md:rounded-none">
+          {isLastStep ? <Summary /> : <Form />}
         </Main>
-        <div className="flex justify-between bg-white col-span-full self-end mt-20 p-[1rem] md:col-start-3 md:col-span-1 md:row-start-2 md:px-24">
-          {currentStep > 0 && (
+        {!subscriptionIsConfirmed && (
+          <div className="flex justify-between bg-white col-span-full self-end mt-20 p-[1rem] md:col-start-3 md:col-span-1 md:row-start-2 md:px-24">
+            {currentStep > 0 && (
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  decrementCurrentStep();
+                }}
+              >
+                go back
+              </Button>
+            )}
             <Button
-              variant="ghost"
+              className="ml-auto"
+              variant={isLastStep ? 'terminal' : 'normal'}
               onClick={() => {
-                decrementCurrentStep();
+                if (!isLastStep && inputIsValid) incrementCurrentStep();
+                else triggerAllUntouched();
+                if (isLastStep) setSubscriptionConfirmation();
               }}
             >
-              go back
+              next step
             </Button>
-          )}
-          <Button
-            className="ml-auto"
-            onClick={() => {
-              if (currentStep < TOTAL_STEPS && inputIsValid)
-                incrementCurrentStep();
-              else triggerAllUntouched();
-            }}
-          >
-            next step
-          </Button>
-        </div>
+          </div>
+        )}
       </Container>
     </div>
   );

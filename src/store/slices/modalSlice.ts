@@ -9,6 +9,11 @@ export const createModalSlice: StateCreator<
   ModalSliceType
 > = (set) => ({
   currentStep: 0,
+  subscriptionIsConfirmed: false,
+  setSubscriptionConfirmation: () =>
+    set(() => ({
+      subscriptionIsConfirmed: true,
+    })),
   setCurrentStep: (index: number) =>
     set(() => ({
       currentStep: index,

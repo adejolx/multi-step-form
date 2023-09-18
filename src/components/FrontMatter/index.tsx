@@ -3,24 +3,12 @@ import { cn } from 'utils';
 interface FrontMatterProps {
   title: string;
   description: string;
-  align?: 'left' | 'center';
+  className?: string;
 }
-const FrontMatter = ({
-  title,
-  description,
-  align = 'left',
-}: FrontMatterProps) => {
+const FrontMatter = ({ title, description, className }: FrontMatterProps) => {
   return (
-    <div className="mb-8">
-      <h1
-        className={cn(
-          'text-2xl text-blue-400 font-bold',
-          align === 'left' && 'text-left',
-          align === 'center' && 'text-center',
-        )}
-      >
-        {title}
-      </h1>
+    <div className={cn('mb-8 space-y-4', className)}>
+      <h1 className={cn('text-4xl text-blue-400 font-bold')}>{title}</h1>
       <p className="">{description}</p>
     </div>
   );
