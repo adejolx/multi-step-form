@@ -4,8 +4,6 @@ import { checkInputValidity } from 'utils';
 
 import './App.css';
 
-import { useEffect, useRef } from 'react';
-
 function App() {
   const TOTAL_STEPS = 4;
   const {
