@@ -20,9 +20,9 @@ function App() {
   const isLastStep = currentStep === TOTAL_STEPS - 1;
   return (
     <div className="h-full grid md:place-content-center bg-gray-200">
-      <Container className="grid grid-cols-container-sm md:grid-cols-container-md md:rounded-2xl md:bg-white md:py-[1rem] md:w-[1024px] md:h-[640px]">
+      <Container className="grid grid-cols-container-sm md:grid-cols-container-md md:rounded-2xl md:bg-white md:py-[1rem] md:w-[1024px] md:h-[640px] md:shadow-2xl">
         <Aside className="col-span-full row-start-1 row-end-3 md:rounded-xl md:col-start-2 md:col-span-1" />
-        <Main className="py-8 px-6 bg-white space-y-24 col-start-2 col-span-1 row-start-2 row-end-10 self-start rounded-lg md:px-24 md:row-start-1 md:row-end-3 md:col-start-3 md:col-span-1 md:rounded-none">
+        <Main className="py-12 px-6 bg-white col-start-2 col-span-1 row-start-2 row-end-10 self-start rounded-lg shadow-2xl md:shadow-none md:px-24 md:row-start-1 md:row-end-3 md:col-start-3 md:col-span-1 md:rounded-none">
           {isLastStep ? <Summary /> : <Form />}
         </Main>
         {!subscriptionIsConfirmed && (
